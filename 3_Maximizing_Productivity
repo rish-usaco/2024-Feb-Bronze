@@ -1,0 +1,63 @@
+import java.util.*;
+
+public class threeeeee {
+    
+    static int search(int a[], int key) {
+        
+        int low = 0, high = a.length;
+        int mid;
+        
+        while (low < high) {
+            mid = low + (high - low) / 2;
+            if (key <= a[mid]) {
+                high = mid;
+            }
+            else {
+                low = mid+1;
+            }
+        }
+        
+        if (low < a.length && a[low] < key) {
+            low++;
+        }
+        while (low < a.length && a[low] == key) {
+            low++;
+        }
+        return low;
+    }
+    
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        
+        int N = scan.nextInt();
+        int Q = scan.nextInt();
+        int[] C = new int[N];
+        int[] T = new int[N];
+        int[] time = new int[N];
+        for (int i = 0; i < N; i++) {
+            C[i] = scan.nextInt();
+        }
+        for (int i = 0; i < N; i++) {
+            T[i] = scan.nextInt();
+            time[i] = C[i] - T[i];
+        }
+        Arrays.sort(time);
+        
+        
+        
+        for (int t = 0; t < Q; t++) {
+            int v = scan.nextInt();
+            int s = scan.nextInt();
+            
+            int count = N-search(time, s);
+            //System.out.println(count);
+            if (count >= v) {
+                System.out.println("YES");
+            } else {
+                System.out.println("NO");
+            }
+        }
+        
+        
+    }
+}
